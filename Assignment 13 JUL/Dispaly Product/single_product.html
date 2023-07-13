@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single Product</title>
+    <style>
+        /* CSS styles for single product page */
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #77adf3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .product {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .product img {
+            width: 50%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        .product h3 {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .product p {
+            margin-bottom: 10px;
+        }
+       button {
+            padding: 10px 20px;
+            background-color: #090a0a;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="product" class="product"></div>
+    </div>
+
+    <script>
+        const productElement = document.getElementById("product");
+
+        // Retrieve the selected product from localStorage
+        const selectedProduct = JSON.parse(localStorage.getItem("selectedProduct"));
+
+        if (selectedProduct) {
+            const product = document.createElement("div");
+            product.classList.add("product");
+
+            const image = document.createElement("img");
+            image.src = selectedProduct.image;
+            image.alt = selectedProduct.title;
+            product.appendChild(image);
+
+            const title = document.createElement("h3");
+            title.textContent = selectedProduct.title;
+            product.appendChild(title);
+
+            const price = document.createElement("p");
+            price.textContent = "$" + selectedProduct.price;
+            product.appendChild(price);
+
+            const buyButton = document.createElement("button");
+            buyButton.classList.add("buy-button");
+            buyButton.textContent = "Buy Now";
+            product.appendChild(buyButton);
+
+            productElement.appendChild(product);
+        } else {
+            const message = document.createElement("p");
+            message.textContent = "No product selected";
+            productElement.appendChild(message);
+        }
+    </script>
+</body>
+
+</html>
